@@ -18,6 +18,8 @@ def update_bot():
         finally:
             file.close()
 
+        words_to_remove = set(words_to_remove)
+
 
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
@@ -50,11 +52,7 @@ def update_bot():
                     tweet_text = tweet_text.replace(punc, '')
 
                 tweet_text = tweet_text.split(' ')
-                for common_word in words_to_remove:
-                    try:
-                        tweet_text.remove(common_word)
-                    except ValueError:
-                        pass
+                tweet_text = list(set(tweet_text) - words_to_remove)
 
                 if tweet_text[0] != 'rt':
                     if len(data[day].keys()) == 0:
