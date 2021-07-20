@@ -45,7 +45,7 @@ def update_bot():
             tweet_text = tweet.text
             for punc in punctuation:
                 tweet_text.replace(punc, '').replace('\u2026', '')
-            if tweet_text.split(' ')[0] != 'RT':
+            if tweet_text.split(' ')[0] is not 'RT':
                 if len(data[day].keys()) == 0:
                     if tweet.created_at > datetime.datetime.fromisoformat(day):
                         data[day][cur_time].append(tweet_text.split(' '))
