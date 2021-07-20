@@ -74,7 +74,7 @@ def update_bot():
             tweets_of_today = []
             for key in data[day].keys():
                 if data[day][key]:
-                    tweets_of_today.append(*data['2021-07-20'][key])
+                    tweets_of_today.append(data['2021-07-20'][key])
 
             tweets_of_today = chain.from_iterable(tweets_of_today)
 
