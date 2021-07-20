@@ -20,7 +20,7 @@ def update_bot():
 
     name = "WxTrending"
 
-    day = datetime.datetime.today(tzinfo=est)
+    day = datetime.datetime.now(tzinfo=est)
     day = f"{day.year}-{('0' if len(str(day.month)) == 1 else '') + str(day.month)}" \
           f"-{('0' if len(str(day.day)) == 1 else '') + str(day.day)}"
 
