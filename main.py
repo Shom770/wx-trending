@@ -47,7 +47,7 @@ def update_bot():
                 pass
             else:
                 for punc, common_word in zip(punctuation, words_to_remove):
-                    tweet_text.replace(punc, '').replace(common_word, '')
+                    tweet_text = tweet_text.replace(punc, '').replace(common_word, '')
                 if tweet_text.split(' ')[0] != 'RT':
                     if len(data[day].keys()) == 0:
                         if tweet.created_at > datetime.datetime.fromisoformat(day):
