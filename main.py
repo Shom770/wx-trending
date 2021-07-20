@@ -82,8 +82,10 @@ def update_bot():
             tweets_of_today = Counter(tweets_of_today)
             tweets_of_today = dict(tweets_of_today.most_common(10))
 
+            ct = 0
             for key, val in zip(tweets_of_today.keys(), tweets_of_today.values()):
-                trending_words += f'{key} [used {val} times]\n--\n'
+                ct += 1
+                trending_words += f'{ct}. {key} [used {val} times]\n--\n'
 
             bot.update_status(trending_words)
 
