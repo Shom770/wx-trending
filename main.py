@@ -28,6 +28,8 @@ def update_bot():
         if name not in bot.followers(follower.screen_name):
             bot.create_friendship(follower.screen_name)
 
+    if col.find_one() is None:
+        col.insert_one({})
     previous_data = col.find_one()
     data = col.find_one()
 
