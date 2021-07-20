@@ -69,7 +69,7 @@ def update_bot():
                                                                           [keys_of_json.index(cur_time) - 1]):
                         data[day][cur_time].append(tweet_text)
 
-        if True:
+        if datetime.datetime.now().replace(hour=23, minute=44) < datetime.datetime.now() < datetime.datetime.now().replace(hour=23, minute=59):
             trending_words = 'Trending Today:\n'
             tweets_of_today = []
             for key in data[day].keys():
@@ -78,12 +78,9 @@ def update_bot():
 
             tweets_of_today = list(chain.from_iterable(tweets_of_today))
             tweets_of_today = list(chain.from_iterable(tweets_of_today))
-            print(tweets_of_today)
 
             tweets_of_today = Counter(tweets_of_today)
             tweets_of_today = dict(tweets_of_today.most_common(10))
-
-            print(f'trended: {tweets_of_today}')
 
             for key, val in zip(tweets_of_today.keys(), tweets_of_today.values()):
                 trending_words += f'{key} [used {val} times]\n--\n'
