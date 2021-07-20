@@ -15,7 +15,7 @@ def update_bot():
         col = db['twitter']
         try:
             file = open("words_to_remove.txt", "r")
-            words_to_remove = [line.strip() for line in file]
+            words_to_remove = [line.strip().lower() for line in file]
         finally:
             file.close()
 
@@ -49,7 +49,6 @@ def update_bot():
                 tweet_text = tweet_text[2:]
 
             tweet_text = tweet_text.replace('\u2026', '')
-            print(tweet_text)
             if 'continue' in tweet_text or 'issue' in tweet_text \
                     or 'severe' in tweet_text or 'warning' in tweet_text or 'advisory' in tweet_text:
                 pass
@@ -59,6 +58,7 @@ def update_bot():
 
                 tweet_text = tweet_text.split(' ')
                 tweet_text = list(set(tweet_text) - words_to_remove)
+                print(repr(tweet_text))
 
                 if len(data[day].keys()) == 0:
                     if tweet.created_at > datetime.datetime.fromisoformat(day):
