@@ -43,19 +43,27 @@ def update_bot():
         for tweet in bot.home_timeline(count=75):
             punctuation = "!()-[]{};:'\",<>./?@#$%^&*_~"
             tweet_text = tweet.text.lower()
-            if 'spc' in tweet_text or 'iembot' in tweet_text:
+            if 'spc' == tweet_text[0] or 'iembot' in tweet_text:
                 pass
             else:
-                for punc, common_word in zip(punctuation, words_to_remove):
-                    tweet_text = tweet_text.replace(punc, '').replace(common_word, '')
-                if tweet_text.split(' ')[0] != 'RT':
+                for punc in punctuation:
+                    tweet_text = tweet_text.replace(punc, '')
+
+                tweet_text = tweet_text.split(' ')
+                for common_word in words_to_remove:
+                    try:
+                        tweet_text.remove(common_word)
+                    except ValueError:
+                        pass
+
+                if tweet_text[0] != 'rt':
                     if len(data[day].keys()) == 0:
                         if tweet.created_at > datetime.datetime.fromisoformat(day):
-                            data[day][cur_time].append(tweet_text.split(' '))
+                            data[day][cur_time].append(tweet_text)
                     else:
                         if tweet.created_at > datetime.datetime.fromisoformat((keys_of_json := list(data[day].keys()))
                                                                               [keys_of_json.index(cur_time) - 1]):
-                            data[day][cur_time].append(tweet_text.split(' '))
+                            data[day][cur_time].append(tweet_text)
 
         if datetime.datetime.now().replace(hour=23, minute=43) < datetime.datetime.now() < \
                 datetime.datetime.now().replace(hour=23, minute=49):
