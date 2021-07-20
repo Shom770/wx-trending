@@ -4,7 +4,6 @@ import pymongo
 from time import sleep
 from collections import Counter
 from itertools import chain
-import schedule
 import tweepy
 
 def update_bot():
@@ -71,5 +70,5 @@ def update_bot():
 
 
 while True:
-    schedule.every(15).minutes.do(update_bot)
-    sleep(1)
+    sleep(900)
+    update_bot()
