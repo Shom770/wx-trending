@@ -44,8 +44,11 @@ def update_bot():
 
         for tweet in bot.home_timeline(count=75):
             punctuation = "!()-[]{};:'\",<>./?@#$%^&*_~"
-            tweet_text = tweet.text.lower()[2:] if 'rt' in tweet_text else tweet.text.lower()
-            if 'continues' in tweet_text or 'issues' in tweet_text or 'severe' in tweet_text or 'warning' in tweet_text or 'advisory' in tweet_text:
+            tweet_text = tweet.text.lower()
+            if 'rt' in tweet_text:
+                tweet_text = tweet_text[2:]
+            if 'continue' in tweet_text or 'issue' in tweet_text \
+                    or 'severe' in tweet_text or 'warning' in tweet_text or 'advisory' in tweet_text:
                 pass
             else:
                 for punc in punctuation:
