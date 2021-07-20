@@ -47,6 +47,9 @@ def update_bot():
             tweet_text = tweet.text.lower()
             if 'rt' in tweet_text:
                 tweet_text = tweet_text[2:]
+
+            tweet_text = tweet_text.replace('\u2026', '')
+            print(tweet_text)
             if 'continue' in tweet_text or 'issue' in tweet_text \
                     or 'severe' in tweet_text or 'warning' in tweet_text or 'advisory' in tweet_text:
                 pass
