@@ -77,6 +77,7 @@ def update_bot():
                     tweets_of_today.append(data['2021-07-20'][key])
 
             tweets_of_today = list(chain.from_iterable(tweets_of_today))
+            tweets_of_today = list(chain.from_iterable(tweets_of_today))
             print(tweets_of_today)
 
             tweets_of_today = Counter(tweets_of_today)
