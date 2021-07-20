@@ -36,7 +36,7 @@ def update_bot():
 
         data[day][cur_time] = []
 
-        for tweet in bot.home_timeline(count=50):
+        for tweet in bot.home_timeline(count=75):
             punctuation = "!()-[]{};:'\",<>./?@#$%^&*_~"
             tweet_text = tweet.text
             for punc in punctuation:
