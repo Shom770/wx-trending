@@ -5,14 +5,12 @@ from time import sleep
 from collections import Counter
 from itertools import chain
 import tweepy
-from pytz import timezone, utc
 
 
 def update_bot():
     try:
         client = pymongo.MongoClient("mongodb+srv://Twitter:Sh070708@cluster0.nuqx6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
         db = client['db']
-        est = timezone('EST')
         col = db['twitter']
 
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
@@ -21,7 +19,7 @@ def update_bot():
 
         name = "WxTrending"
 
-        day = datetime.datetime.now(tz=est)
+        day = datetime.datetime.today()
         day = f"{day.year}-{('0' if len(str(day.month)) == 1 else '') + str(day.month)}" \
               f"-{('0' if len(str(day.day)) == 1 else '') + str(day.day)}"
 
@@ -38,7 +36,7 @@ def update_bot():
         if day not in data.keys():
             data[day] = {}
 
-        cur_time = datetime.datetime.now(tz=est).__str__()
+        cur_time = datetime.datetime.now().__str__()
 
         data[day][cur_time] = []
 
@@ -49,14 +47,15 @@ def update_bot():
                 tweet_text.replace(punc, '').replace('\u2026', '')
             if tweet_text.split(' ')[0] != 'RT':
                 if len(data[day].keys()) == 0:
-                    if tweet.created_at > utc.localize(datetime.datetime.fromisoformat(day).replace(tzinfo=None)):
+                    if tweet.created_at > datetime.datetime.fromisoformat(day):
                         data[day][cur_time].append(tweet_text.split(' '))
                 else:
-                    if tweet.created_at > utc.localize(datetime.datetime.fromisoformat((keys_of_json := list(data[day].keys()))[keys_of_json.index(cur_time) - 1]).replace(tzinfo=None)):
+                    if tweet.created_at > datetime.datetime.fromisoformat((keys_of_json := list(data[day].keys()))
+                                                                          [keys_of_json.index(cur_time) - 1]):
                         data[day][cur_time].append(tweet_text.split(' '))
 
-        if datetime.datetime.now(tz=est).replace(hour=23, minute=43) < datetime.datetime.now(tz=est) < \
-                datetime.datetime.now(tz=est).replace(hour=23, minute=49):
+        if datetime.datetime.now().replace(hour=23, minute=43) < datetime.datetime.now() < \
+                datetime.datetime.now().replace(hour=23, minute=49):
             trending_words = 'Trending Today:\n'
             tweets_of_today = []
             for key in data[day].keys():
