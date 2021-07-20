@@ -29,7 +29,8 @@ def update_bot():
             bot.create_friendship(follower.screen_name)
 
     if col.find_one() is None:
-        col.insert_one({})
+        col.insert_one({
+        })
     previous_data = col.find_one()
     data = col.find_one()
 
