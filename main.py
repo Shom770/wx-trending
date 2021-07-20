@@ -49,10 +49,10 @@ def update_bot():
                 tweet_text.replace(punc, '').replace('\u2026', '')
             if tweet_text.split(' ')[0] != 'RT':
                 if len(data[day].keys()) == 0:
-                    if tweet.created_at > utc.localize(datetime.datetime.fromisoformat(day)):
+                    if tweet.created_at > utc.localize(datetime.datetime.fromisoformat(day).replace(tzinfo=None)):
                         data[day][cur_time].append(tweet_text.split(' '))
                 else:
-                    if tweet.created_at > utc.localize(datetime.datetime.fromisoformat((keys_of_json := list(data[day].keys()))[keys_of_json.index(cur_time) - 1])):
+                    if tweet.created_at > utc.localize(datetime.datetime.fromisoformat((keys_of_json := list(data[day].keys()))[keys_of_json.index(cur_time) - 1]).replace(tzinfo=None)):
                         data[day][cur_time].append(tweet_text.split(' '))
 
         if datetime.datetime.now(tz=est).replace(hour=23, minute=43) < datetime.datetime.now(tz=est) < \
