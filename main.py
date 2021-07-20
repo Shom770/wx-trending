@@ -23,10 +23,6 @@ def update_bot():
         day = f"{day.year}-{('0' if len(str(day.month)) == 1 else '') + str(day.month)}" \
               f"-{('0' if len(str(day.day)) == 1 else '') + str(day.day)}"
 
-        for follower in bot.followers(name):
-            if name not in bot.followers(follower.screen_name):
-                bot.create_friendship(follower.screen_name)
-
         if col.find_one() is None:
             col.insert_one({
             })
@@ -40,7 +36,7 @@ def update_bot():
 
         data[day][cur_time] = []
 
-        for tweet in bot.home_timeline(count=100):
+        for tweet in bot.home_timeline(count=50):
             punctuation = "!()-[]{};:'\",<>./?@#$%^&*_~"
             tweet_text = tweet.text
             for punc in punctuation:
