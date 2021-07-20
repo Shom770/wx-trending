@@ -73,5 +73,5 @@ def update_bot():
 
 
 while True:
-    sleep(900)
     update_bot()
+    sleep(900)
