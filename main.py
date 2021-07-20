@@ -54,7 +54,7 @@ def update_bot():
                 tweet_text = tweet_text.split(' ')
                 tweet_text = list(set(tweet_text) - words_to_remove)
 
-                if 'rt' in tweet_text:
+                if 'rt' not in tweet_text:
                     if len(data[day].keys()) == 0:
                         if tweet.created_at > datetime.datetime.fromisoformat(day):
                             data[day][cur_time].append(tweet_text)
