@@ -45,7 +45,7 @@ def update_bot():
         for tweet in bot.home_timeline(count=75):
             punctuation = "!()-[]{};:'\",<>./?@#$%^&*_~"
             tweet_text = tweet.text.lower()
-            if ('spc' in tweet_text and 'until' in tweet_text) and 'iembot' in tweet_text:
+            if 'issues' in tweet_text:
                 pass
             else:
                 for punc in punctuation:
