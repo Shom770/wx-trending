@@ -70,7 +70,7 @@ def update_bot():
                         data[day][cur_time].append(tweet_text)
 
         if datetime.datetime.now().replace(hour=23, minute=44) < datetime.datetime.now() < datetime.datetime.now().replace(hour=23, minute=59):
-            trending_words = 'Trending Today:\n--\n'
+            trending_words = 'Trending Today:\n---\n'
             tweets_of_today = []
             for key in data[day].keys():
                 if data[day][key]:
