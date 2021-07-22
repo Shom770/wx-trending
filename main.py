@@ -79,16 +79,22 @@ def update_bot():
                 if data[day][key]:
                     tweets_of_today.append(data[day][key])
 
+            check_context = tweets_of_today
             tweets_of_today = list(chain.from_iterable(tweets_of_today))
             tweets_of_today = list(chain.from_iterable(tweets_of_today))
 
             tweets_of_today = Counter(tweets_of_today)
-            tweets_of_today = dict(tweets_of_today.most_common(10))
+            tweets_of_today = dict(tweets_of_today.most_common(5))
 
             ct = 0
             for key, val in zip(tweets_of_today.keys(), tweets_of_today.values()):
                 ct += 1
-                trending_words += f'{ct}. {key} [{val}x]\n\n'
+                context_by_key = [sorted(tweet_list, key=lambda x: x != key)[tweet_list.count(key):] for tweet_list in
+                                  check_context if key in tweet_list]
+                context_by_key = list(chain.from_iterable(context_by_key))
+                context_by_key = Counter(context_by_key)
+                context_by_key = tuple(dict(context_by_key.most_common(2)).keys())
+                trending_words += f'{ct}. {key}, {context_by_key[0]}, {context_by_key[1]}\n\n'
 
             bot.update_status(trending_words)
 
