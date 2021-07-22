@@ -93,7 +93,7 @@ def update_bot():
                                   check_context if key in tweet_list]
                 context_by_key = list(chain.from_iterable(context_by_key))
                 context_by_key = Counter(context_by_key)
-                context_by_key = tuple(dict(context_by_key.most_common(2)).keys())
+                context_by_key = tuple(dict(context_by_key.most_common(3)).keys())
                 trending_words += f'{ct}. {key}, {context_by_key[0]}, {context_by_key[1]}\n\n'
 
             bot.update_status(trending_words)
