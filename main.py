@@ -43,8 +43,11 @@ def update_bot():
         data[day][cur_time] = []
 
         for tweet in bot.home_timeline(count=75):
-            punctuation = "!()-[]{};:'\",<>./?@#$%^&*_~"
+            punctuation = "!()-[]{}’‘;:'\",<>./?@#$%^&*_~"
             tweet_text = tweet.text.lower()
+            if '@' in tweet_text.split(' ')[0]:
+                tweet_text = ''.join(tweet_text.split(' ')[1:])
+
             if 'rt' in tweet_text:
                 tweet_text = tweet_text[2:]
 
@@ -69,10 +72,9 @@ def update_bot():
                                                                           [keys_of_json.index(cur_time) - 1]):
                         data[day][cur_time].append(tweet_text)
 
-        if True:
-            trending_words = 'Trending Today:\n---\n'
+        if datetime.datetime.now().replace(hour=23, minute=45) < datetime.datetime.now():
+            trending_words = 'Trending Today:\n\n'
             tweets_of_today = []
-            day = '2021-07-21'
             for key in data[day].keys():
                 if data[day][key]:
                     tweets_of_today.append(data[day][key])
@@ -86,7 +88,7 @@ def update_bot():
             ct = 0
             for key, val in zip(tweets_of_today.keys(), tweets_of_today.values()):
                 ct += 1
-                trending_words += f'{ct}. {key} [used {val} times]\n--\n'
+                trending_words += f'{ct}. {key} [{val}x]\n\n'
 
             bot.update_status(trending_words)
 
