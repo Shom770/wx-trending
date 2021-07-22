@@ -45,11 +45,12 @@ def update_bot():
         for tweet in bot.home_timeline(count=75):
             punctuation = "!()-[]{}‘;:'\",<>./?@#$%^&*_~"
             tweet_text = tweet.text.lower()
-            if '@' in list(tweet_text):
-                tweet_text = ' '.join(tweet_text.split(' ')[2:])
 
             if 'rt' in tweet_text:
                 tweet_text = tweet_text[2:]
+
+            if '@' in list(tweet_text):
+                tweet_text = ' '.join(tweet_text.split(' ')[1:])
 
             tweet_text = tweet_text.replace('\u2026', '')
             if 'continue' in tweet_text or 'issue' in tweet_text \
