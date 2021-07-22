@@ -25,7 +25,7 @@ def update_bot():
         auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
         bot = tweepy.API(auth)
 
-        day = datetime.datetime.today()
+        day = datetime.datetime.now()
         day = f"{day.year}-{('0' if len(str(day.month)) == 1 else '') + str(day.month)}" \
               f"-{('0' if len(str(day.day)) == 1 else '') + str(day.day)}"
 
@@ -38,7 +38,7 @@ def update_bot():
         if day not in data.keys():
             data[day] = {}
 
-        cur_time = datetime.datetime.now().__str__()
+        cur_time = str(datetime.datetime.now())
 
         data[day][cur_time] = []
 
