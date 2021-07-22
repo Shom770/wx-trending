@@ -95,7 +95,9 @@ def update_bot():
                 context_by_key = list(chain.from_iterable(context_by_key))
                 context_by_key = Counter(context_by_key)
                 context_by_key = tuple(dict(context_by_key.most_common(3)).keys())
-                trending_words += f'{ct}. {key}, {context_by_key[0]}, {context_by_key[1]}, {context_by_key[2]}\n\n'
+                text_to_add = f'{ct}. {key}, {context_by_key[0]}, {context_by_key[1]}, {context_by_key[2]}\n\n'
+                if len(text_to_add) > 5:
+                    trending_words += text_to_add
 
             bot.update_status(trending_words)
 
