@@ -69,9 +69,10 @@ def update_bot():
                                                                           [keys_of_json.index(cur_time) - 1]):
                         data[day][cur_time].append(tweet_text)
 
-        if datetime.datetime.now().replace(hour=23, minute=44) < datetime.datetime.now():
+        if True:
             trending_words = 'Trending Today:\n---\n'
             tweets_of_today = []
+            day = '2021-07-21'
             for key in data[day].keys():
                 if data[day][key]:
                     tweets_of_today.append(data[day][key])
