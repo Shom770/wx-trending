@@ -49,7 +49,7 @@ def update_bot():
             if 'rt' in tweet_text:
                 tweet_text = tweet_text[2:]
 
-            if '@' in list(tweet_text):
+            while '@' in list(tweet_text):
                 tweet_text = ' '.join(tweet_text.split(' ')[1:])
 
             tweet_text = tweet_text.replace('\u2026', '')
