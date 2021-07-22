@@ -88,7 +88,7 @@ def update_bot():
             tweets_of_today = dict(tweets_of_today.most_common(6))
 
             ct = 0
-            for key, val in zip(tweets_of_today.keys(), tweets_of_today.values()):
+            for key in tweets_of_today.keys():
                 ct += 1
                 context_by_key = [sorted(tweet_list, key=lambda x: x != key)[tweet_list.count(key):] for tweet_list in
                                   check_context if key in tweet_list]
