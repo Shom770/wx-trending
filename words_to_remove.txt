@@ -145,6 +145,8 @@ move
 right
 boy
 old
+today
+across
 too
 same
 tell
@@ -191,6 +193,7 @@ us
 again
 animal
 point
+into
 mother
 world
 near
