@@ -74,7 +74,7 @@ def update_bot():
                         data[day][cur_time].append(tweet_text)
 
         if datetime.datetime.now().replace(hour=23, minute=45) < datetime.datetime.now():
-            trending_words = 'Trending Today:\n\n'
+            trending_words = 'Trending Today:\n---\n'
             tweets_of_today = []
             for key in data[day].keys():
                 if data[day][key]:
@@ -85,7 +85,7 @@ def update_bot():
             tweets_of_today = list(chain.from_iterable(tweets_of_today))
 
             tweets_of_today = Counter(tweets_of_today)
-            tweets_of_today = dict(tweets_of_today.most_common(6))
+            tweets_of_today = dict(tweets_of_today.most_common(7))
 
             ct = 0
             for key in tweets_of_today.keys():
@@ -96,8 +96,7 @@ def update_bot():
                 context_by_key = Counter(context_by_key)
                 context_by_key = tuple(dict(context_by_key.most_common(3)).keys())
                 text_to_add = f'{ct}. {key}, {context_by_key[0]}, {context_by_key[1]}, {context_by_key[2]}\n\n'
-                if len(text_to_add) > 5:
-                    trending_words += text_to_add
+                trending_words += text_to_add
 
             bot.update_status(trending_words)
 
