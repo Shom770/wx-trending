@@ -98,6 +98,8 @@ def update_bot():
                 text_to_add = f'{ct}. {key}, {context_by_key[0]}, {context_by_key[1]}, {context_by_key[2]}\n\n'
                 trending_words += text_to_add
 
+            if len(trending_words) > 280:
+                trending_words = ''.join(list(trending_words)[:280])
             bot.update_status(trending_words)
 
         col.update_one(previous_data, {'$set': data}, upsert=True)
